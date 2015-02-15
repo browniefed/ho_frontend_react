@@ -2,8 +2,8 @@ var React = require('react/addons'),
 	Router = require('react-router'),
 	Link = Router.Link;
 
-// var LandingSearchIcon = require('hackoregon/icons/LandingSearch'),
-// 	LandingOregonIcon = require('hackoregon/icons/LandingOregon');
+var LandingSearchIcon = require('hackoregon/icons/LandingSearch'),
+	LandingOregonIcon = require('hackoregon/icons/LandingOregon');
 
 var Home = React.createClass({
 
@@ -23,18 +23,18 @@ var Home = React.createClass({
 			    <div className="row">
 			      <div className="center-block">
 			        <div className="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3 search-home">
-			          <a href="#/results/candidate/#">
+			          <Link to="search">
 			          <div className="spacer">
-			          	{/*<LandingSearchIcon className="img-responsive" />*/}
+			          	<LandingSearchIcon className="img-responsive" />
 			          </div>
-			          </a>
+			          </Link>
 			        </div>
 			        <div className="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-md-3 view-all">
-			          <a href="#oregon">
+			          <Link to="oregon">
 			          <div className="spacer">
-			          	{/*<LandingOregonIcon className="img-responsive" />*/}
+			          	<LandingOregonIcon className="img-responsive" />
 			          </div>
-			          </a>
+			          </Link>
 			        </div>
 			      </div>
 			    </div>
