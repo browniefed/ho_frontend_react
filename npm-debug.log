@@ -1,106 +1,26 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node',
-1 verbose cli   '/usr/local/bin/npm',
-1 verbose cli   'install',
-1 verbose cli   'sass-loader',
-1 verbose cli   '--save' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'run', 'start-dev' ]
 2 info using npm@1.4.28
-3 info using node@v0.10.33
-4 warn package.json react-starter@0.0.0 No repository field.
-5 verbose readDependencies using package.json deps
-6 verbose cache add [ 'sass-loader', null ]
-7 verbose cache add name=undefined spec="sass-loader" args=["sass-loader",null]
-8 verbose parsed url { protocol: null,
-8 verbose parsed url   slashes: null,
-8 verbose parsed url   auth: null,
-8 verbose parsed url   host: null,
-8 verbose parsed url   port: null,
-8 verbose parsed url   hostname: null,
-8 verbose parsed url   hash: null,
-8 verbose parsed url   search: null,
-8 verbose parsed url   query: null,
-8 verbose parsed url   pathname: 'sass-loader',
-8 verbose parsed url   path: 'sass-loader',
-8 verbose parsed url   href: 'sass-loader' }
-9 silly lockFile 1f82baf5-sass-loader sass-loader
-10 verbose lock sass-loader /Users/jasonbrown/.npm/1f82baf5-sass-loader.lock
-11 silly lockFile 1f82baf5-sass-loader sass-loader
-12 silly lockFile 1f82baf5-sass-loader sass-loader
-13 verbose addNamed [ 'sass-loader', '' ]
-14 verbose addNamed [ null, '*' ]
-15 silly lockFile eb6111f0-sass-loader sass-loader@
-16 verbose lock sass-loader@ /Users/jasonbrown/.npm/eb6111f0-sass-loader.lock
-17 silly addNameRange { name: 'sass-loader', range: '*', hasData: false }
-18 verbose request where is /sass-loader
-19 verbose request registry https://registry.npmjs.org/
-20 verbose request id e4a003296b677d8c
-21 verbose url raw /sass-loader
-22 verbose url resolving [ 'https://registry.npmjs.org/', './sass-loader' ]
-23 verbose url resolved https://registry.npmjs.org/sass-loader
-24 verbose request where is https://registry.npmjs.org/sass-loader
-25 info trying registry request attempt 1 at 16:43:54
-26 verbose etag "9L854DI5PC77X5SKTTQFPGTFL"
-27 http GET https://registry.npmjs.org/sass-loader
-28 http 200 https://registry.npmjs.org/sass-loader
-29 silly registry.get cb [ 200,
-29 silly registry.get   { date: 'Sun, 15 Feb 2015 00:43:54 GMT',
-29 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-29 silly registry.get     etag: '"CNAXIC9ENY81QN1A9SC23XSLN"',
-29 silly registry.get     'content-type': 'application/json',
-29 silly registry.get     'cache-control': 'max-age=60',
-29 silly registry.get     'content-length': '11757',
-29 silly registry.get     'accept-ranges': 'bytes',
-29 silly registry.get     via: '1.1 varnish',
-29 silly registry.get     age: '0',
-29 silly registry.get     'x-served-by': 'cache-sjc3122-SJC',
-29 silly registry.get     'x-cache': 'MISS',
-29 silly registry.get     'x-cache-hits': '0',
-29 silly registry.get     'x-timer': 'S1423961034.542633,VS0,VE355',
-29 silly registry.get     vary: 'Accept',
-29 silly registry.get     'keep-alive': 'timeout=10, max=50',
-29 silly registry.get     connection: 'Keep-Alive' } ]
-30 silly addNameRange number 2 { name: 'sass-loader', range: '*', hasData: true }
-31 silly addNameRange versions [ 'sass-loader',
-31 silly addNameRange   [ '0.0.1',
-31 silly addNameRange     '0.0.2',
-31 silly addNameRange     '0.1.0',
-31 silly addNameRange     '0.1.1',
-31 silly addNameRange     '0.2.0',
-31 silly addNameRange     '0.3.0',
-31 silly addNameRange     '0.3.1',
-31 silly addNameRange     '0.4.0-beta.1' ] ]
-32 verbose addNamed [ 'sass-loader', '0.4.0-beta.1' ]
-33 verbose addNamed [ '0.4.0-beta.1', '0.4.0-beta.1' ]
-34 silly lockFile 3bd6a5b2-sass-loader-0-4-0-beta-1 sass-loader@0.4.0-beta.1
-35 verbose lock sass-loader@0.4.0-beta.1 /Users/jasonbrown/.npm/3bd6a5b2-sass-loader-0-4-0-beta-1.lock
-36 silly lockFile 82164e44-der-sass-loader-0-4-0-beta-1-tgz https://registry.npmjs.org/sass-loader/-/sass-loader-0.4.0-beta.1.tgz
-37 verbose lock https://registry.npmjs.org/sass-loader/-/sass-loader-0.4.0-beta.1.tgz /Users/jasonbrown/.npm/82164e44-der-sass-loader-0-4-0-beta-1-tgz.lock
-38 verbose addRemoteTarball [ 'https://registry.npmjs.org/sass-loader/-/sass-loader-0.4.0-beta.1.tgz',
-38 verbose addRemoteTarball   'e72cb45ed815c9f9d6337d1b113d9b357f3f8d44' ]
-39 info retry fetch attempt 1 at 16:43:55
-40 verbose fetch to= /var/folders/2z/_6syjs6s5b936xhmqw_7vgqr0000gn/T/npm-4610-0rSD7E_z/registry.npmjs.org/sass-loader/-/sass-loader-0.4.0-beta.1.tgz
-41 http GET https://registry.npmjs.org/sass-loader/-/sass-loader-0.4.0-beta.1.tgz
-42 http 200 https://registry.npmjs.org/sass-loader/-/sass-loader-0.4.0-beta.1.tgz
-43 silly lockFile 82164e44-der-sass-loader-0-4-0-beta-1-tgz https://registry.npmjs.org/sass-loader/-/sass-loader-0.4.0-beta.1.tgz
-44 silly lockFile 82164e44-der-sass-loader-0-4-0-beta-1-tgz https://registry.npmjs.org/sass-loader/-/sass-loader-0.4.0-beta.1.tgz
-45 silly lockFile 3bd6a5b2-sass-loader-0-4-0-beta-1 sass-loader@0.4.0-beta.1
-46 silly lockFile 3bd6a5b2-sass-loader-0-4-0-beta-1 sass-loader@0.4.0-beta.1
-47 silly lockFile eb6111f0-sass-loader sass-loader@
-48 silly lockFile eb6111f0-sass-loader sass-loader@
-49 error Error: EACCES, mkdir '/Users/jasonbrown/.npm/sass-loader/0.4.0-beta.1'
-49 error  { [Error: EACCES, mkdir '/Users/jasonbrown/.npm/sass-loader/0.4.0-beta.1']
-49 error   errno: 3,
-49 error   code: 'EACCES',
-49 error   path: '/Users/jasonbrown/.npm/sass-loader/0.4.0-beta.1',
-49 error   parent: 'react-starter' }
-50 error Please try running this command again as root/Administrator.
-51 error System Darwin 13.4.0
-52 error command "node" "/usr/local/bin/npm" "install" "sass-loader" "--save"
-53 error cwd /Users/jasonbrown/hackoregon_react
-54 error node -v v0.10.33
-55 error npm -v 1.4.28
-56 error path /Users/jasonbrown/.npm/sass-loader/0.4.0-beta.1
-57 error code EACCES
-58 error errno 3
-59 error stack Error: EACCES, mkdir '/Users/jasonbrown/.npm/sass-loader/0.4.0-beta.1'
-60 verbose exit [ 3, true ]
+3 info using node@v0.10.35
+4 verbose run-script [ 'prestart-dev', 'start-dev', 'poststart-dev' ]
+5 info prestart-dev react-starter@0.0.0
+6 info start-dev react-starter@0.0.0
+7 verbose unsafe-perm in lifecycle true
+8 info react-starter@0.0.0 Failed to exec start-dev script
+9 error react-starter@0.0.0 start-dev: `node lib/server-development`
+9 error Exit status 8
+10 error Failed at the react-starter@0.0.0 start-dev script.
+10 error This is most likely a problem with the react-starter package,
+10 error not with npm itself.
+10 error Tell the author that this fails on your system:
+10 error     node lib/server-development
+10 error You can get their info via:
+10 error     npm owner ls react-starter
+10 error There is likely additional logging output above.
+11 error System Darwin 13.4.0
+12 error command "node" "/usr/local/bin/npm" "run" "start-dev"
+13 error cwd /Users/jbrown/ho_frontend_react
+14 error node -v v0.10.35
+15 error npm -v 1.4.28
+16 error code ELIFECYCLE
+17 verbose exit [ 1, true ]

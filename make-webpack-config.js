@@ -30,7 +30,7 @@ module.exports = function(options) {
 		"css": "css-loader",
 		"less": "css-loader!less-loader",
 		"styl": "css-loader!stylus-loader",
-		"scss|sass": "css-loader!sass-loader"
+		"scss|sass": "raw-loader!sass-loader"
 	};
 	var additionalLoaders = [
 		// { test: /some-reg-exp$/, loader: "any-loader" }

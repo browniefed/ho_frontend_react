@@ -1,12 +1,12 @@
 // Import our base styles
-@import 'base';
-
+@import "base";
+@import "./../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 // Import styles for all other parts of the site
 // all styles should be wrapped at the top level
 // e.g the '_mainViz' partial is wrapped with the id
 // of the main div for that portion of the site #main-viz
-@import 'where';
-@import 'mainViz';
+@import "where";
+@import "mainViz";
 
 .jumbotron.minified {
   transition: padding-top 1s, padding-bottom 1s;
