@@ -1,61 +1,28 @@
-# webpack/react-starter
+# Welcome to the HackOregon front end app!
 
-Starter template for react and webpack.
+## Philosophy
+The core Hack Oregon application is meant to expose answers to 4 main questions about campaign finance using open data:
+**who?**  Who is being funded, and by which PACs, Corporations, and individuals.
+**what?**  What are the outcomes of campaign finance dollars at work?  (good or bad)
+**when?**  When do cycles of campaign and funding take place and how does this effect the political process and civic life?
+**where?** What does the breakdown of donors/funders look like in Oregon and how does 'place' effect the political process?
 
-## Features
+Components for the core application lives at the top level of each directory.  Additionally, in each folder there is a `community` folder for contributions that do not relate to the core application, but should exist on their own.
 
-* Compilation with webpack
-* React and jsx
-* react-router
-* Stylesheets can be CSS, LESS, SASS, Stylus or mixed
-* Embedded resources like images or fonts use DataUrls if appropriate
-* A simple flag loads a react component (and dependencies) on demand.
-* Development
-  * Development server
-  * Optionally Hot Module Replacement development server (LiveReload for Stylesheets and React components enabled)
-  * Uses SourceUrl for performance, but you may switch to SourceMaps easily
-* Production
-  * Server example for prerendering for React components
-  * Initial data inlined in page
-  * Long Term Caching through file hashes enabled
-  * Generate separate css file to avoid FOUC
-  * Minimized CSS and javascript
-* Also supports coffee-script files if you are more a coffee-script person.
-* You can also require markdown or text files for your content.
-* Just require the files...
 
-## Installation
+## Getting started
+We're using webpack for our build system.
+```
+#Install webpack:
+npm install -g webpack
+git clone <this_repo>
+cd <this_repo>
 
-Just clone this repo and change the `origin` git remote.
-
-``` text
+#install node packages
 npm install
 ```
 
-
-## Development server
-
-``` text
-# start the webpack-dev-server
-npm run dev-server
-# wait for the first compilation is successful
-
-# in another terminal/console
-# start the node.js server in development mode
-npm run start-dev
-
-# open this url in your browser
-http://localhost:8080/
-```
-
-The configuration is `webpack-dev-server.config.js`.
-
-It automatically recompiles and refreshes the page when files are changed.
-
-Also check the [webpack-dev-server documentation](http://webpack.github.io/docs/webpack-dev-server.html).
-
-
-## Hot Module Replacement development server
+Once everything is installed run:
 
 ``` text
 # start the webpack-dev-server in HMR mode
@@ -70,80 +37,27 @@ npm run start-dev
 http://localhost:8080/
 ```
 
-The configuration is `webpack-hot-dev-server.config.js`.
+## Getting acquainted with things
+Hack Oregon's front end is contained in an [React JS app](http://reactjs.org).
 
-It automatically recompiles when files are changed. When a hot-replacement-enabled file is changed (i. e. stylesheets or React components) the module is hot-replaced. If Hot Replacement is not possible the page is refreshed.
+Additionally, we are using [SASS](http://sass-lang.com/) which compiles into css and [coffeescript](http://coffeescript.org).
 
-Hot Module Replacement has a performance impact on compilation.
+**Adding new styles:** add a partial to the styles folder e.g. `_mypartial.scss` and then include the partial in the `main.scss` file with an import statement `@import 'mypartial';`
 
 
-## Production compilation and server
-
-``` text
-# build the client bundle and the prerendering bundle
-npm run build
-
-# start the node.js server in production mode
-npm run start
-
-# open this url in your browser
-http://localhost:80/
+## Contributing
+You probably have some amazing ideas, and things you'd like to contribute - we'd love to include them.  Here's how:
+```bash
+# fork this repo
+git clone <your_fork>
+git checkout -b <your_awesome_new_feature>
+git branch -D master
+# hack away!
 ```
+## Wireframes
+https://gomockingbird.com/mockingbird/#44apvbt/sCsPR
 
-The configuration is `webpack-production.config.js`.
+When you feel like you are ready for your visualization or enhancement to be included, submit a pull request.  There may be some things to change (especially if you are working on the core application) and we'll work together to get things running nicely.
 
-The server is at `lib/server.js`
+<!-- If you are working on a visualization that is not one of the 'who', 'what', etc. parts of the application, pick a unique name for your visualization and then you can include everything you need under the `community` folder.  Convention is to use the name of your viz as the prefix for any components you add to the app.  E.g. if you are creating a new directive for your feature, it should live in the `app/scripts/directives/community` folder and if the route is `mynewfeature` you should call the file `myNewFeatureDir.{js/coffee}` with a directive of the same name `myNewFeatureDir`.  This can then be used as `<my-new-feature-dir></my-new-feature-div>` within your template. -->
 
-The production setting builds two configurations: one for the client (`build/public`) and one for the serverside prerendering (`build/prerender`).
-
-
-## Legacy static assets
-
-Asserts in `public` are also served.
-
-
-## Build visualization
-
-After a production build you may want to visualize your modules and chunks tree.
-
-Use the [analyse tool](http://webpack.github.io/analyse/) with the file at `build/stats.json`.
-
-
-## Loaders and file types
-
-Many file types are preconfigured, but not every loader is installed. If you get an error like `Cannot find module "xxx-loader"`, you'll need to install the loader with `npm install xxx-loader --save` and restart the compilation.
-
-
-## Common changes to the configuration
-
-### Add more entry points
-
-(for a multi page app)
-
-1. Add an entry point to `make-webpack-config.js` (`var entry`).
-2. Add a new top-level react component in `app` (`xxxRoutes.js`, `xxxStoreDescriptions.js`, `xxxStores.js`).
-3. (Optional) Enable `commonsChunk` in `webpack-production.config.js` and add `<script src="COMMONS_URL"></script>` to `app/prerender.html`.
-4. Modify the server code to require, serve and prerender the other entry point.
-5. Restart compilation.
-
-### Switch devtool to SourceMaps
-
-Change `devtool` property in `webpack-dev-server.config.js` and `webpack-hot-dev-server.config.js` to `"source-map"` (better module names) or `"eval-source-map"` (faster compilation).
-
-SourceMaps have a performance impact on compilation.
-
-### Enable SourceMaps in production
-
-1. Uncomment the `devtool` line in `webpack-production.config.js`.
-2. Make sure that the folder `build\public\debugging` is access controlled, i. e. by password.
-
-SourceMaps have a performance impact on compilation.
-
-SourceMaps contains your unminimized source code, so you need to restrict access to `build\public\debugging`.
-
-
-## License
-
-Copyright (c) 2012-2015 Tobias Koppers [![Gittip donate button](http://img.shields.io/gittip/sokra.png)](https://www.gittip.com/sokra/)
-
-MIT (http://www.opensource.org/licenses/mit-license.php)
