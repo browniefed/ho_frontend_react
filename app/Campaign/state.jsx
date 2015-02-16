@@ -30,17 +30,64 @@ var State = React.createClass({
         };
     },
     componentDidMount: function() {
+
+
+        API.getAllOregonSum(_.bind(function(err, res){
+            this.setState({
+                allOregonSum: res
+            })
+        }, this));
+
+        API.getOregonByContributions(_.bind(function(err, res){
+            this.setState({
+                oregonByContributions: res
+            })
+        }, this));
+
+        /*
+            Spending Chart
+         */
         API.getOregonByPurposeCodes(_.bind(function(err, res) {
             this.setState({
                 spending: res
             })
         }, this));
 
+        /* Money State map*/
+        API.getOregonInByState(_.bind(function(err, res){
+            this.setState({
+                moneyByState: res
+            })
+        }, this));
+
+        /* Funding Expenditurs*/
         API.getStateSumByDate(_.bind(function(err, res){
             this.setState({
                 fundingExpenditures: res
             })
-        }, this))
+        }, this));
+
+
+        API.getOregonIndividualContributors(_.bind(function(err, res){
+            this.setState({
+                individualContributors: res
+            })
+        }, this));
+
+        API.getOregonBusinessContributors(_.bind(function(err, res){
+            this.setState({
+                businessContributors: res
+            })
+        }, this));
+
+        API.getOregonCommitteeContributors(_.bind(function(err, res){
+            this.setState({
+                comitteeContributors: res
+            })
+        }, this));
+
+
+
     },
     getFundingExpendituresElement: function() {
         if (this.state.fundingExpenditures) {
@@ -55,6 +102,17 @@ var State = React.createClass({
             return (
                 <Spending dataSet={this.state.spending}/>
             )
+        }
+
+        return null;
+    },
+    getMoneyByState: function() {
+        if (this.state.moneyByState) {
+            return (
+                <StateMoney 
+                    money={this.state.moneyByState}
+                />
+            )   
         }
 
         return null;
@@ -121,7 +179,7 @@ var State = React.createClass({
                             <Subtitle>This election year, Oregon has received contributions from all 50 states.</Subtitle>
                         </Header>
                         <Content>
-                            <StateMoney />
+                            {this.getMoneyByState()}
                         </Content>
                     </Section>
                 </div>
