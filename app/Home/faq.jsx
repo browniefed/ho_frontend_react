@@ -1,9 +1,11 @@
-var React = require('react/addons');
+var React = require('react/addons'),
+    DocumentTitle = require('react-document-title');
 
 
 var FAQ = React.createClass({
     render: function() {
         return (
+            <DocumentTitle title="Behind The Curtain - FAQ">
                 <div className="container faq">
                     <h2>FAQ</h2>
 
@@ -175,6 +177,7 @@ var FAQ = React.createClass({
                     </div>
                     
                 </div>
+            </DocumentTitle>
             );
     }
 });

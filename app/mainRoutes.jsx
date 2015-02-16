@@ -10,7 +10,8 @@ var Application = require("./Application"),
     About = require('./Home/about'),
     Search = require('./Search/search'),
     SearchResults = require('./Search/results'),
-    State = require('./Campaign/state');
+    State = require('./Campaign/state'),
+    Campaign = require('./Campaign/campaign');
 
 module.exports = (
 	<Route name="app" path="/" handler={Application}>
@@ -21,6 +22,7 @@ module.exports = (
         <Route name="search" path="search" handler={Search}>
             <Route name="search-results" path=":keyword" handler={SearchResults} />
         </Route>
+        <Route name="campaign" path="campaign/:campaignId" handler={Campaign} />
         <Route name="oregon" path="oregon" handler={State} />
 		<DefaultRoute handler={Home} />
 	</Route>

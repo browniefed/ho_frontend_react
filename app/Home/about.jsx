@@ -1,9 +1,11 @@
-var React = require('react/addons');
+var React = require('react/addons'),
+    DocumentTitle = require('react-document-title');
 
 
 var About = React.createClass({
     render: function() {
         return (
+                <DocumentTitle title="Behind The Curtain - About">
                     <div className="container about">
                         <div className="row">
                             <div className="col-xs-10 col-xs-offset-1">
@@ -34,7 +36,8 @@ var About = React.createClass({
                                 </p>
                             </div>
                         </div>
-                    </div>        
+                    </div>    
+                </DocumentTitle>    
                 );
     }
 });
