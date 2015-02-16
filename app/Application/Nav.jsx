@@ -16,6 +16,7 @@ var Nav = React.createClass({
                     <ul className="nav navbar-nav navbar-right">
                         <li className={this.isActive('search') ? 'selected' : ''}><div><Link to="search">Search</Link></div></li>
                         <li className={this.isActive('oregon') ? 'selected' : ''}><div><Link to="oregon">Oregon</Link></div></li>
+                        <li className={this.isActive('about') ? 'selected' : ''}><div><Link to="about">About</Link></div></li>
                         <li className={this.isActive('faq') ? 'selected' : ''}><div><Link to="faq">FAQ</Link></div></li>
                     </ul>
                   </div>

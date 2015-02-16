@@ -22,13 +22,20 @@ var Search = React.createClass({
     },
     render: function() {
         return (
-            <div>
-                <div> 
+            <div className="container search">
+                <div className="row">
+                    <div className="col-xs-12">
+                        <h1 className="text-center search">Search Campaigns</h1>
+                    </div>
+                </div>
+                <div className="row"> 
                     <SearchBox 
                         value={this.state.value}
                         onSubmit={this.handleSubmit}/>
                 </div>
-                <RouteHandler />
+                <div>
+                    <RouteHandler />
+                </div>
             </div>
         )
     }
