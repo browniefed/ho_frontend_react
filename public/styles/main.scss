@@ -231,6 +231,9 @@ font-size:11px;
   overflow-y: auto;
   overflow-x: hidden;
 }
+.campaign-details {
+    display: inline-block;
+}
 .campaign-tile, .campaign-detail {
   h2 {
     font-family: OpenSansBold;
