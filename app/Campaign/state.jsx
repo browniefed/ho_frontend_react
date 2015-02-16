@@ -12,7 +12,8 @@ var CampaignDetails = require('hackoregon/components/campaign/CampaignDetails'),
     Raised = require('hackoregon/components/campaign/Raised'),
     Spent = require('hackoregon/components/campaign/Spent'),
     GrassRootsRadial = require('hackoregon/components/campaign/GrassRootsRadial'),
-    InDistrictRadial = require('hackoregon/components/campaign/InDistrictRadial');
+    InDistrictRadial = require('hackoregon/components/campaign/InDistrictRadial'),
+    StateMoney = require('hackoregon/components/svg/StateMoney');
 
 
 var data = {};
@@ -76,6 +77,9 @@ var State = React.createClass({
                             <Title>Is the Money Local?</Title>
                             <Subtitle>This election year, Oregon has received contributions from all 50 states.</Subtitle>
                         </Header>
+                        <Content>
+                            <StateMoney />
+                        </Content>
                     </Section>
                 </div>
             </DocumentTitle>
