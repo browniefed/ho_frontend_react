@@ -13,7 +13,8 @@ var CampaignDetails = require('hackoregon/components/campaign/CampaignDetails'),
     Spent = require('hackoregon/components/campaign/Spent'),
     GrassRootsRadial = require('hackoregon/components/campaign/GrassRootsRadial'),
     InDistrictRadial = require('hackoregon/components/campaign/InDistrictRadial'),
-    StateMoney = require('hackoregon/components/svg/StateMoney');
+    StateMoney = require('hackoregon/components/svg/StateMoney'),
+    FundingExpenditures = require('hackoregon/components/svg/FundingExpenditures');
 
 
 var data = {};
@@ -21,8 +22,17 @@ var data = {};
 
 
 var State = React.createClass({
-    componentDidMount: function() {
-
+    getInitialState: function() {
+        return {
+        };
+    },
+    getFundingExpendituresElement: function() {
+        if (this.state.fundingExpendtures) {
+            return (
+                <FundingExpenditures fundingExpendtures={this.state.fundingExpendtures} />
+            )
+        }
+        return null;
     },
     render: function() {
         return (
@@ -58,19 +68,27 @@ var State = React.createClass({
                             <Title>Who's Giving?</Title>
                             <Subtitle>This visualization is calculated by total dollars, not total people.</Subtitle>
                         </Header>
+                        <Content>
+
+                        </Content>
                     </Section>
                     <Section>
                         <Header>
                             <Title>What Are They Spending Money On?</Title>
                             <Subtitle>Did you know campaigns self select these categories?</Subtitle>
                         </Header>
+                        <Content>
+
+                        </Content>
                     </Section>
                     <Section>
                         <Header>
                             <Title>When Are They Raising & Spending Money?</Title>
                             <Subtitle>You can tell a lot about the life cycle of a campaign by looking at their transaction volume and patterns.</Subtitle>
                         </Header>
-                        
+                        <Content>
+                            {this.getFundingExpendituresElement()}
+                        </Content>
                     </Section>
                     <Section>
                         <Header>
