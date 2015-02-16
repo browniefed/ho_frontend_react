@@ -1,7 +1,8 @@
 var React = require('react/addons'),
     DocumentTitle = require('react-document-title'),
     API = require('hackoregon/api/API'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    CurrencyFormat = require('hackoregon/utils/CurrencyFormat');
 
 var Section = require('hackoregon/components/campaign/Section'),
     Content = require('hackoregon/components/campaign/Content'),
@@ -25,16 +26,14 @@ var data = {};
 
 var State = React.createClass({
     getInitialState: function() {
-        return {
-            fundingExpenditures: null
-        };
+        return {};
     },
     componentDidMount: function() {
 
 
         API.getAllOregonSum(_.bind(function(err, res){
             this.setState({
-                allOregonSum: res
+                allOregonSum: res[0]
             })
         }, this));
 
@@ -89,6 +88,7 @@ var State = React.createClass({
 
 
     },
+
     getFundingExpendituresElement: function() {
         if (this.state.fundingExpenditures) {
             return (
@@ -117,6 +117,52 @@ var State = React.createClass({
 
         return null;
     },
+    getWhoChart: function() {
+        return null;
+    },
+    getTopContributors: function() {
+        return null;
+    },
+    getRaised: function() {
+        if (this.state.allOregonSum) {
+            return (
+                    <Raised 
+                        amount={CurrencyFormat(this.state.allOregonSum.in)}
+                    />
+            )
+        }
+        return null;
+    },
+    getSpent: function() {
+        if (this.state.allOregonSum) {
+            return (
+                    <Spent 
+                        amount={CurrencyFormat(this.state.allOregonSum.out)}
+                    />
+            )
+        }
+        return null;
+    },
+    getGrassrootsRadial: function() {
+        if (this.state.allOregonSum) {
+            return (
+                    <GrassRootsRadial 
+                        percent={this.state.allOregonSum.total_grass_roots/this.state.allOregonSum.in}
+                    />
+            )
+        }
+        return null;
+    },
+    getInDistrictRadial: function() {
+        if (this.state.allOregonSum) {
+            return (
+                    <InDistrictRadial 
+                        percent={this.state.allOregonSum.from_within/this.state.allOregonSum.in}
+                    />
+            )
+        }
+        return null;
+    },
     render: function() {
         return (
             <DocumentTitle title="Behind The Curtain - Oregon Summary Page">
@@ -132,16 +178,12 @@ var State = React.createClass({
                             </div>
                             <CampaignDetails>
                                 <div>
-                                    <Raised amount={100} />
-                                    <Spent amount={100} />
+                                    {this.getRaised()}
+                                    {this.getSpent()}
                                 </div>
                                 <div>
-                                    <GrassRootsRadial 
-                                        percent={.12}
-                                    />
-                                    <InDistrictRadial 
-                                        percent={.29}
-                                    />
+                                    {this.getGrassrootsRadial()}
+                                    {this.getInDistrictRadial()}
                                 </div>
                             </CampaignDetails>
                         </Content>
@@ -152,7 +194,12 @@ var State = React.createClass({
                             <Subtitle>This visualization is calculated by total dollars, not total people.</Subtitle>
                         </Header>
                         <Content>
-                            {}
+                            <div>
+                                {this.getWhoChart()}
+                            </div>
+                            <div>
+                                {this.getTopContributors()}
+                            </div>
                         </Content>
                     </Section>
                     <Section>
