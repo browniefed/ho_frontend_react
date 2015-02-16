@@ -14,7 +14,8 @@ var CampaignDetails = require('hackoregon/components/campaign/CampaignDetails'),
     GrassRootsRadial = require('hackoregon/components/campaign/GrassRootsRadial'),
     InDistrictRadial = require('hackoregon/components/campaign/InDistrictRadial'),
     StateMoney = require('hackoregon/components/svg/StateMoney'),
-    FundingExpenditures = require('hackoregon/components/svg/FundingExpenditures');
+    FundingExpenditures = require('hackoregon/components/svg/FundingExpenditures'),
+    Spending = require('hackoregon/components/svg/Spending');
 
 
 var data = {};
@@ -32,6 +33,15 @@ var State = React.createClass({
                 <FundingExpenditures fundingExpendtures={this.state.fundingExpendtures} />
             )
         }
+        return null;
+    },
+    getSpendingElement: function() {
+        if (this.state.spending) {
+            return (
+                <Spending spending={this.state.spending}/>
+            )
+        }
+
         return null;
     },
     render: function() {
@@ -69,7 +79,7 @@ var State = React.createClass({
                             <Subtitle>This visualization is calculated by total dollars, not total people.</Subtitle>
                         </Header>
                         <Content>
-
+                            {}
                         </Content>
                     </Section>
                     <Section>
@@ -78,7 +88,7 @@ var State = React.createClass({
                             <Subtitle>Did you know campaigns self select these categories?</Subtitle>
                         </Header>
                         <Content>
-
+                            {this.getSpendingElement()}
                         </Content>
                     </Section>
                     <Section>
