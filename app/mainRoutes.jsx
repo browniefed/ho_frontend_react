@@ -9,7 +9,7 @@ var Application = require("./Application"),
     FAQ = require('./Home/faq'),
     About = require('./Home/about'),
     Search = require('./Search/search'),
-    SearchResult = require('./Search/results'),
+    SearchResults = require('./Search/results'),
     State = require('./Campaign/state');
 
 module.exports = (
@@ -19,7 +19,7 @@ module.exports = (
         <Route name="about" path="about" handler={About} />
 
         <Route name="search" path="search" handler={Search}>
-            <Route name="search-results" path="search/:keyword" handler={SearchResults} />
+            <Route name="search-results" path=":keyword" handler={SearchResults} />
         </Route>
         <Route name="oregon" path="oregon" handler={State} />
 		<DefaultRoute handler={Home} />
