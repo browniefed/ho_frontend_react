@@ -1,6 +1,7 @@
 var React = require('react/addons'),
     DocumentTitle = require('react-document-title'),
-    API = require('hackoregon/api/API');
+    API = require('hackoregon/api/API'),
+    _ = require('lodash');
 
 var Section = require('hackoregon/components/campaign/Section'),
     Content = require('hackoregon/components/campaign/Content'),
@@ -25,12 +26,26 @@ var data = {};
 var State = React.createClass({
     getInitialState: function() {
         return {
+            fundingExpenditures: null
         };
     },
+    componentDidMount: function() {
+        API.getOregonByPurposeCodes(_.bind(function(err, res) {
+            this.setState({
+                spending: res
+            })
+        }, this));
+
+        API.getStateSumByDate(_.bind(function(err, res){
+            this.setState({
+                fundingExpenditures: res
+            })
+        }, this))
+    },
     getFundingExpendituresElement: function() {
-        if (this.state.fundingExpendtures) {
+        if (this.state.fundingExpenditures) {
             return (
-                <FundingExpenditures fundingExpendtures={this.state.fundingExpendtures} />
+                <FundingExpenditures fundingExpenditures={this.state.fundingExpenditures} />
             )
         }
         return null;
@@ -38,7 +53,7 @@ var State = React.createClass({
     getSpendingElement: function() {
         if (this.state.spending) {
             return (
-                <Spending spending={this.state.spending}/>
+                <Spending dataSet={this.state.spending}/>
             )
         }
 
