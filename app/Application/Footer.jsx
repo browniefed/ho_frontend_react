@@ -1,5 +1,6 @@
 var React = require('react/addons'),
     Router = require('react-router'),
+    SocialButtons = require('hackoregon/components/SocialButtons'),
     Link = Router.Link;
 
 
@@ -14,9 +15,7 @@ var Footer = React.createClass({
                       <div className="col-sm-3 social-media-thumbnails">
 
                           <h4>Hack Oregon</h4>
-                          {/*<social-tags data-twitter="https://twitter.com/HackOregon"
-                            data-mail="mailto:catherine@hackoregon.org"
-                            size="36" overlap="false"/>*/}
+                          <SocialButtons />
 
                       </div>
                       <div className="col-sm-3">
