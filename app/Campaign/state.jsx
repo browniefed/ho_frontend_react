@@ -57,6 +57,21 @@ var UIINDEX = {
         'Other': CONTRIBUTION.NA
       }
 
+var contributors = [
+            {
+                key: 'individualContributors',
+                title: 'Top Individual Donors'
+            },
+            {
+                key: 'businessContributors',
+                title: 'Top Business Donors'
+            },
+            {
+                key: 'comitteeContributors',
+                title: 'Top Committee Donors'
+            }
+        ];
+
 function processDataForGroups(data) {
       var result = {};
       _.each(data, function(val) {
@@ -132,8 +147,6 @@ var State = React.createClass({
             })
         }, this));
 
-
-
     },
 
     getFundingExpendituresElement: function() {
@@ -193,30 +206,24 @@ var State = React.createClass({
         );
     },
     getTopContributors: function() {
+        var contributionElements = _.map(contributors, function(contributor) {
+            if (_.isEmpty(this.state[contributor.key])) {
+                return null;
+            }
+
+            return (
+                <div className="col-sm-6 col-xs-12">
+                    <Contributors
+                        key={contributor.key}
+                        title={contributor.title}
+                        contributors={this.state[contributor.key]}
+                    />
+                </div>
+            )
+        }, this)
         return (
             <div className="row">
-                <div className="col-sm-6 col-xs-12">
-                    <Contributors
-                        key="individual"
-                        title="Top Individual Donors"
-                        contributors={this.state.individualContributors}
-                    />
-                </div>
-                <div className="col-sm-6 col-xs-12">
-                    <Contributors
-                        key="business"
-                        title="Top Business Donors"
-                        contributors={this.state.businessContributors}
-                    />
-                </div>
-                <div className="col-sm-6 col-xs-12">
-                    <Contributors
-                        key="committee"
-                        title="Top Committee Donors"
-                        contributors={this.state.comitteeContributors}
-                    />
-                </div>
-
+                {contributionElements}
             </div>  
         );
     },
