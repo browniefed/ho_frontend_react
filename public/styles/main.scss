@@ -512,9 +512,6 @@ $iconSize: 85px;
 }
 
 .contributors {
-    display: inline-block;
-    max-width: 33%;
-    margin-left: 15px;
     .contributor-donation {
         background-color: rgb(16, 113, 111);
         height: 15px;
@@ -526,7 +523,13 @@ $iconSize: 85px;
     margin-left: 16.666667%;
   }
 }
-
+.donorList {
+    font-size: 1em;
+    line-height: 1.25em;
+    height: auto;
+    margin-top: 5px;
+    transition: max-height 1s;
+}
 .search-box {
   position: relative;
 

@@ -9,6 +9,7 @@ var React = require('react/addons'),
 var Section = require('hackoregon/components/campaign/Section'),
     Content = require('hackoregon/components/campaign/Content'),
     Header = require('hackoregon/components/campaign/Header'),
+    HeaderTitle = require('hackoregon/components/campaign/HeaderTitle'),
     Title = require('hackoregon/components/campaign/Title'),
     Subtitle = require('hackoregon/components/campaign/Subtitle');
 
@@ -232,7 +233,9 @@ var Campaign = React.createClass({
     getSpendingElement: function() {
         if (this.state.spending) {
             return (
-                <Spending dataSet={this.state.spending}/>
+                <Spending 
+                    dataSet={this.state.spending}
+                />
             )
         }
 
@@ -280,22 +283,28 @@ var Campaign = React.createClass({
     },
     getTopContributors: function() {
         return (
-            <div>
-                <Contributors
-                    key="individual"
-                    title="Top Individual Donors"
-                    contributors={this.state.individualContributors}
-                />
-                <Contributors
-                    key="business"
-                    title="Top Business Donors"
-                    contributors={this.state.businessContributors}
-                />
-                <Contributors
-                    key="committee"
-                    title="Top Committee Donors"
-                    contributors={this.state.comitteeContributors}
-                />
+            <div className="row">
+                <div className="col-sm-6 col-xs-12">
+                    <Contributors
+                        key="individual"
+                        title="Top Individual Donors"
+                        contributors={this.state.individualContributors}
+                    />
+                </div>
+                <div className="col-sm-6 col-xs-12">
+                    <Contributors
+                        key="business"
+                        title="Top Business Donors"
+                        contributors={this.state.businessContributors}
+                    />
+                </div>
+                <div className="col-sm-6 col-xs-12">
+                    <Contributors
+                        key="committee"
+                        title="Top Committee Donors"
+                        contributors={this.state.comitteeContributors}
+                    />
+                </div>
 
             </div>  
         );
@@ -342,36 +351,50 @@ var Campaign = React.createClass({
     },
     render: function() {
         return (
-            <DocumentTitle title="Behind The Curtain - Oregon Summary Page">
-                <div className="campaign-detail">
+            <DocumentTitle title={"Behind The Curtain - " + (this.state.title || '')}>
+                <div className="campaign-detail container">
+                    <div className="col-md-9 col-md-offset-1">
                     <Section>
                         <Header>
-                            <Title>{this.state.title}</Title>
+                            <HeaderTitle>{this.state.title}</HeaderTitle>
                         </Header>
                         <Content>
-                            <div className="col-md-2">
+                            <div className="col-md-4">
                               <img className="campaign-photo" width="100%" src="/images/icons/genderless.svg" />
                               <p>Submit your campaign photo <a href="mailto:hello@hackoregon.com?Subject=Campaign%20photo" target="_top">here</a>.</p>
                             </div>
+                            <div className="col-md-2">
+                                <div className="party party-"></div>
+                            </div>
                             <CampaignDetails>
-                                <div>
+                                <div className="row">
                                     {this.getRaised()}
+                                </div>
+                                <div className="row spent-row">
                                     {this.getSpent()}
                                 </div>
-                                <div>
-                                    {this.getGrassrootsRadial()}
-                                    {this.getInDistrictRadial()}
-                                </div>
-                                <div className="col-xs-5 col-xs-offset-6 grassroots-fact">
-                                    <h4>Did you know the statewide average for grassroots funding is usually less than 13%?</h4>
+                                <div className="row">
+                                    <div className="col-sm-4">
+                                        {this.getGrassrootsRadial()}
+                                    </div>
+                                    <div>
+                                        {this.getInDistrictRadial()}
+                                    </div>
                                 </div>
                             </CampaignDetails>
                         </Content>
                     </Section>
+                <Section>
+                      <div className="col-xs-5 col-xs-offset-6 grassroots-fact">
+                        <h4>Did you know the statewide average for grassroots funding is usually less than 13%?</h4>
+                      </div>
+                      </Section>
                     <Section>
                         <Header>
-                            <Title>Who's Giving?</Title>
-                            <Subtitle>This visualization is calculated by total dollars, not total people.</Subtitle>
+                            <Title>
+                                Who's Giving?
+                                <Subtitle>This visualization is calculated by total dollars, not total people.</Subtitle>
+                            </Title>
                         </Header>
                         <Content>
                             <div>
@@ -384,17 +407,24 @@ var Campaign = React.createClass({
                     </Section>
                     <Section>
                         <Header>
-                            <Title>What Are They Spending Money On?</Title>
-                            <Subtitle>Did you know campaigns self select these categories?</Subtitle>
+                            <Title>
+                                What Are They Spending Money On?
+                                <Subtitle>Did you know campaigns self select these categories?</Subtitle>
+                            </Title>
                         </Header>
                         <Content>
-                            {this.getSpendingElement()}
+                            <div className="row">
+                                {this.getSpendingElement()}
+                            </div>
                         </Content>
                     </Section>
                     <Section>
                         <Header>
-                            <Title>When Are They Raising & Spending Money?</Title>
-                            <Subtitle>You can tell a lot about the life cycle of a campaign by looking at their transaction volume and patterns.</Subtitle>
+                            <Title>
+                                When Are They Raising & Spending Money?
+                                <Subtitle>You can tell a lot about the life cycle of a campaign by looking at their transaction volume and patterns.</Subtitle>
+                            </Title>
+                            
                         </Header>
                         <Content>
                             {this.getFundingExpendituresElement()}
@@ -402,13 +432,18 @@ var Campaign = React.createClass({
                     </Section>
                     <Section>
                         <Header>
-                            <Title>Is the Money Local?</Title>
-                            <Subtitle>This election year, Oregon has received contributions from all 50 states.</Subtitle>
+                            <Title>
+                                Is the Money Local?
+                                <Subtitle>This election year, Oregon has received contributions from all 50 states.</Subtitle>
+                            </Title>
+                            
                         </Header>
                         <Content>
+                            <div className="money-by-state" />
                             {this.getMoneyByState()}
                         </Content>
                     </Section>
+                    </div>
                 </div>
             </DocumentTitle>
         )

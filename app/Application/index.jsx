@@ -1,14 +1,25 @@
-var React = require("react");
-var RouteHandler = require("react-router").RouteHandler;
+var React = require("react"),
+    Router = require('react-router'),
+    StateMixin = Router.State,
+    RouteHandler = Router.RouteHandler;
 
 var Footer = require('./Footer'),
     Nav = require('./Nav');
 
 var Application = React.createClass({
+    mixins: [StateMixin],
+    getNav: function() {
+        if (!this.isActive('home')) {
+            return (
+                <Nav />
+            )
+        }
+        return null;
+    },
 	render: function() {
 		return (
 			<div className="application content">
-                <Nav />
+                {this.getNav()}
 				<RouteHandler />
                 <Footer />
 			</div>
