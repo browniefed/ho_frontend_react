@@ -7,7 +7,7 @@ var Nav = React.createClass({
     mixins: [StateMixin],
     render: function() {
         return (
-            <nav className="navbar navbar-default" role="navigation" id="main-nav">
+            <nav className="navbar navbar-fixed-top navbar-default" role="navigation" id="main-nav">
                 <div className="container">
                   <Link to="home" className="navbar-brand navbar-left">
                     <img className="tiny-logo" src="/images/new_logo_1.png" />

@@ -7,7 +7,7 @@ var Footer = require('./Footer'),
 var Application = React.createClass({
 	render: function() {
 		return (
-			<div className="application">
+			<div className="application content">
                 <Nav />
 				<RouteHandler />
                 <Footer />

@@ -81,13 +81,13 @@ var State = React.createClass({
         /* General Sum Statistics */
         API.getAllOregonSum(_.bind(function(err, res){
             this.setState({
-                allOregonSum: res[0]
+                campaignData: res[0]
             })
         }, this));
         /* Get Statics For Group Contributors*/
         API.getOregonByContributions(_.bind(function(err, res){
             this.setState({
-                oregonByContributions: processDataForGroups(res)
+                contributions: processDataForGroups(res)
             })
         }, this));
 
@@ -164,7 +164,7 @@ var State = React.createClass({
         return null;
     },
     getWhoChartMax: function() {
-        return _.max(this.state.oregonByContributions, function(contribution) {
+        return _.max(this.state.contributions, function(contribution) {
             return contribution.amount;
         }).amount;
     },
@@ -175,13 +175,13 @@ var State = React.createClass({
                     title={who.label}
                     icon={"icon-" + who.icon}
                     max={this.getWhoChartMax()}
-                    amount={this.state.oregonByContributions[key].amount}
+                    amount={this.state.contributions[key].amount}
                 />
             )
         }, this)
     },
     getWhoChart: function() {
-        if (!this.state.oregonByContributions) {
+        if (!this.state.contributions) {
             return null;
         }
 
@@ -195,56 +195,58 @@ var State = React.createClass({
         return (
             <div>
                 <Contributors
+                    key="individual"
                     title="Top Individual Donors"
                     contributors={this.state.individualContributors}
                 />
                 <Contributors
+                    key="business"
                     title="Top Business Donors"
                     contributors={this.state.businessContributors}
                 />
                 <Contributors
+                    key="committee"
                     title="Top Committee Donors"
                     contributors={this.state.comitteeContributors}
                 />
-
             </div>  
         );
     },
     getRaised: function() {
-        if (this.state.allOregonSum) {
+        if (this.state.campaignData) {
             return (
                     <Raised 
-                        amount={CurrencyFormat(this.state.allOregonSum.in)}
+                        amount={CurrencyFormat(this.state.campaignData.in)}
                     />
             )
         }
         return null;
     },
     getSpent: function() {
-        if (this.state.allOregonSum) {
+        if (this.state.campaignData) {
             return (
                     <Spent 
-                        amount={CurrencyFormat(this.state.allOregonSum.out)}
+                        amount={CurrencyFormat(this.state.campaignData.out)}
                     />
             )
         }
         return null;
     },
     getGrassrootsRadial: function() {
-        if (this.state.allOregonSum) {
+        if (this.state.campaignData) {
             return (
                     <GrassRootsRadial 
-                        percent={this.state.allOregonSum.total_grass_roots/this.state.allOregonSum.in}
+                        percent={this.state.campaignData.total_grass_roots/this.state.campaignData.in}
                     />
             )
         }
         return null;
     },
     getInDistrictRadial: function() {
-        if (this.state.allOregonSum) {
+        if (this.state.campaignData) {
             return (
                     <InDistrictRadial 
-                        percent={this.state.allOregonSum.from_within/this.state.allOregonSum.in}
+                        percent={this.state.campaignData.from_within/this.state.campaignData.in}
                     />
             )
         }

@@ -186,7 +186,7 @@ var Campaign = React.createClass({
         /* General Sum Statistics */
         API.getCommitteeDataById(campaignId, _.bind(function(err, res){
             this.setState({
-                allOregonSum: res[0],
+                campaignData: res[0],
                 title: res[0].candidate_name
             })
         }, this));
@@ -209,7 +209,7 @@ var Campaign = React.createClass({
         API.getTransactionDataById(campaignId, _.bind(function(err, res) {
             var data = processTransactions(res);
             this.setState({
-                oregonByContributions: data.contributions,
+                contributions: data.contributions,
                 individualContributors: data.donors.indiv,
                 businessContributors: data.donors.corp,
                 comitteeContributors: data.donors.pac,
@@ -250,7 +250,7 @@ var Campaign = React.createClass({
         return null;
     },
     getWhoChartMax: function() {
-        return _.max(this.state.oregonByContributions, function(contribution) {
+        return _.max(this.state.contributions, function(contribution) {
             return contribution.amount;
         }).amount;
     },
@@ -258,16 +258,17 @@ var Campaign = React.createClass({
         return _.map(UIINDEX, function(who, key) {
             return (
                 <WhoGiving 
+                    key={key}
                     title={who.label}
                     icon={"icon-" + who.icon}
                     max={this.getWhoChartMax()}
-                    amount={this.state.oregonByContributions[key].amount}
+                    amount={this.state.contributions[key].amount}
                 />
             )
         }, this)
     },
     getWhoChart: function() {
-        if (!this.state.oregonByContributions) {
+        if (!this.state.contributions) {
             return null;
         }
 
@@ -281,14 +282,17 @@ var Campaign = React.createClass({
         return (
             <div>
                 <Contributors
+                    key="individual"
                     title="Top Individual Donors"
                     contributors={this.state.individualContributors}
                 />
                 <Contributors
+                    key="business"
                     title="Top Business Donors"
                     contributors={this.state.businessContributors}
                 />
                 <Contributors
+                    key="committee"
                     title="Top Committee Donors"
                     contributors={this.state.comitteeContributors}
                 />
@@ -297,40 +301,40 @@ var Campaign = React.createClass({
         );
     },
     getRaised: function() {
-        if (this.state.allOregonSum) {
+        if (this.state.campaignData) {
             return (
                     <Raised 
-                        amount={CurrencyFormat(this.state.allOregonSum.in || this.state.allOregonSum.total)}
+                        amount={CurrencyFormat(this.state.campaignData.in || this.state.campaignData.total)}
                     />
             )
         }
         return null;
     },
     getSpent: function() {
-        if (this.state.allOregonSum) {
+        if (this.state.campaignData) {
             return (
                     <Spent 
-                        amount={CurrencyFormat(this.state.allOregonSum.out || this.state.allOregonSum.total_spent)}
+                        amount={CurrencyFormat(this.state.campaignData.out || this.state.campaignData.total_spent)}
                     />
             )
         }
         return null;
     },
     getGrassrootsRadial: function() {
-        if (this.state.allOregonSum) {
+        if (this.state.campaignData) {
             return (
                     <GrassRootsRadial 
-                        percent={(this.state.allOregonSum.total_grass_roots/this.state.allOregonSum.in) || (this.state.allOregonSum.grassroots/this.state.allOregonSum.total)}
+                        percent={(this.state.campaignData.total_grass_roots/this.state.campaignData.in) || (this.state.campaignData.grassroots/this.state.campaignData.total)}
                     />
             )
         }
         return null;
     },
     getInDistrictRadial: function() {
-        if (this.state.allOregonSum) {
+        if (this.state.campaignData) {
             return (
                     <InDistrictRadial 
-                        percent={(this.state.allOregonSum.from_within/this.state.allOregonSum.in) || (this.state.allOregonSum.instate)}
+                        percent={(this.state.campaignData.from_within/this.state.campaignData.in) || (this.state.campaignData.instate)}
                     />
             )
         }
