@@ -17,10 +17,58 @@ var CampaignDetails = require('hackoregon/components/campaign/CampaignDetails'),
     InDistrictRadial = require('hackoregon/components/campaign/InDistrictRadial'),
     StateMoney = require('hackoregon/components/svg/StateMoney'),
     FundingExpenditures = require('hackoregon/components/svg/FundingExpenditures'),
-    Spending = require('hackoregon/components/svg/Spending');
+    Spending = require('hackoregon/components/svg/Spending'),
+    Contributors = require('hackoregon/components/campaign/Contributors'),
+    WhoGiving = require('hackoregon/components/svg/WhoGiving');
 
 
 var data = {};
+
+
+//SHOW THESE IN THE UI
+var UIINDEX = {
+          PAC: {label: 'PAC', icon: 'pac'},
+          Business:   {label: 'Business', icon: 'corporate'},
+          Grassroots: {label: 'Grass Roots', icon: 'grassroot'},
+          Individual: {label: 'Large Donors', icon: 'individual'},
+          Party:      {label: 'Party', icon: 'party'},
+        };
+
+//THESE ARE KEYS FOR INDEX
+     var CONTRIBUTION = {
+      PAC: 'PAC',
+      BUSINESS: 'Business',
+      GRASSROOTS: 'Grassroots',
+      INDIVIDUAL: 'Individual',
+      PARTY: 'Party',
+      UNION: 'Union',
+      NA: 'NA'
+    };
+
+//Backend Strings to map to UIIndex eventuall
+    var keyMap = {
+        'Political Committee': CONTRIBUTION.PAC,
+        'Large Donor': CONTRIBUTION.INDIVIDUAL,
+        'Grassroot': CONTRIBUTION.GRASSROOTS,
+        'Political Party Committee': CONTRIBUTION.PARTY,
+        'Business Entity': CONTRIBUTION.BUSINESS,
+        'Labor Organization': CONTRIBUTION.UNION,
+        'Other': CONTRIBUTION.NA
+      }
+
+function processDataForGroups(data) {
+      var result = {};
+      _.each(data, function(val) {
+        var key = keyMap[val['contribution_type']];
+        if(key) {
+          if (!_.has(result, key)) {
+            result[key] = { amount: 0 };
+          }
+          result[key].amount += val.total;
+        }
+      });
+      return result;
+}
 
 
 
@@ -30,22 +78,20 @@ var State = React.createClass({
     },
     componentDidMount: function() {
 
-
+        /* General Sum Statistics */
         API.getAllOregonSum(_.bind(function(err, res){
             this.setState({
                 allOregonSum: res[0]
             })
         }, this));
-
+        /* Get Statics For Group Contributors*/
         API.getOregonByContributions(_.bind(function(err, res){
             this.setState({
-                oregonByContributions: res
+                oregonByContributions: processDataForGroups(res)
             })
         }, this));
 
-        /*
-            Spending Chart
-         */
+        /* Spending Chart */
         API.getOregonByPurposeCodes(_.bind(function(err, res) {
             this.setState({
                 spending: res
@@ -66,19 +112,19 @@ var State = React.createClass({
             })
         }, this));
 
-
+        /* Individal Top Donors */
         API.getOregonIndividualContributors(_.bind(function(err, res){
             this.setState({
                 individualContributors: res
             })
         }, this));
-
+        /* Business Top Donors */
         API.getOregonBusinessContributors(_.bind(function(err, res){
             this.setState({
                 businessContributors: res
             })
         }, this));
-
+        /* Committee Top Donors */
         API.getOregonCommitteeContributors(_.bind(function(err, res){
             this.setState({
                 comitteeContributors: res
@@ -117,11 +163,52 @@ var State = React.createClass({
 
         return null;
     },
+    getWhoChartMax: function() {
+        return _.max(this.state.oregonByContributions, function(contribution) {
+            return contribution.amount;
+        }).amount;
+    },
+    getWhoGivings: function() {
+        return _.map(UIINDEX, function(who, key) {
+            return (
+                <WhoGiving 
+                    title={who.label}
+                    icon={"icon-" + who.icon}
+                    max={this.getWhoChartMax()}
+                    amount={this.state.oregonByContributions[key].amount}
+                />
+            )
+        }, this)
+    },
     getWhoChart: function() {
-        return null;
+        if (!this.state.oregonByContributions) {
+            return null;
+        }
+
+        return (
+            <div className="who-chart">
+                {this.getWhoGivings()}
+            </div>
+        );
     },
     getTopContributors: function() {
-        return null;
+        return (
+            <div>
+                <Contributors
+                    title="Top Individual Donors"
+                    contributors={this.state.individualContributors}
+                />
+                <Contributors
+                    title="Top Business Donors"
+                    contributors={this.state.businessContributors}
+                />
+                <Contributors
+                    title="Top Committee Donors"
+                    contributors={this.state.comitteeContributors}
+                />
+
+            </div>  
+        );
     },
     getRaised: function() {
         if (this.state.allOregonSum) {
@@ -172,7 +259,7 @@ var State = React.createClass({
                             <Title>Oregon Summary</Title>
                         </Header>
                         <Content>
-                            <div className="col-md-4">
+                            <div className="col-md-2">
                               <img className="campaign-photo" width="100%" src="/images/icons/landing_oregon.svg" />
                               <p>Submit your campaign photo <a href="mailto:hello@hackoregon.com?Subject=Campaign%20photo" target="_top">here</a>.</p>
                             </div>

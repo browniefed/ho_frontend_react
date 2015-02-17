@@ -511,6 +511,16 @@ $iconSize: 85px;
   }
 }
 
+.contributors {
+    display: inline-block;
+    max-width: 33%;
+    margin-left: 15px;
+    .contributor-donation {
+        background-color: rgb(16, 113, 111);
+        height: 15px;
+        border-radius: 3px;
+    }
+}
 .results {
   .icon-candidate {
     margin-left: 16.666667%;
